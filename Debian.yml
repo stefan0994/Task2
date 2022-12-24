@@ -1,0 +1,27 @@
+- name: Install Debian Apache
+  apt:
+    name: apache2
+    state: present
+
+- name: Start Debian Apache
+  systemd:
+    state: started
+    name: apache2
+    enabled: yes
+
+- name: install the latest version of unzip
+  apt:
+    name: unzip
+    state: latest
+
+- name: Unarchive a file that needs to be downloaded
+  unarchive:
+    src: https://www.free-css.com/assets/files/free-css-templates/download/page256/it-next.zip
+    dest: /tmp/
+    remote_src: yes
+
+- name: Copy files
+  copy: 
+    src: /tmp/it-next/
+    dest: /var/www/html
+    remote_src: yes 
